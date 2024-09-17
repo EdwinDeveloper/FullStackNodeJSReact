@@ -1,35 +1,35 @@
-Aplicación Full Stack con Node.js, React, PostgreSQL y Docker
+Full Stack Application with NodeJS, ReactJS, PostgreSQL and Docker
 
-Este es un proyecto fullstack que consta de diferentes modulos integrados, un backend realizado con NodeJS, un Frontend creado con ReactJS y una base de datos PostgreSQL. Toda la aplicación está containerizada utilizando Docker para facilitar su despliegue y gestión.
+This is a full stack that contains differents modules integrated, one backend build in NodeJS, one Fronted created with ReactJS and 
+a database with PostgreSQL. All the application have containers to make easy the management and deploytment.
 
-Características
+Characteristics:
 
-Backend: Servidor Node.js utilizando ormconfig, conectado a PostgreSQL.
-Frontend: Aplicación React.js para la interfaz de usuario, construida y servida con Nginx.
-Base de Datos: PostgreSQL para la persistencia de datos.
-Dockerizado: Todos los servicios se ejecutan en contenedores aislados utilizando Docker Compose.
+Backend: NodeJS Server that use ormconfig connected to PostgreSQL.
+Frontend: ReactJS Application user interface, build and deploit with Apache server.
+Data Base: PostgreSQL for persistence of data.
+Dockers: All the services deployed are running in docker compose .
 
-Requisitos Previos
+Requirements:
 
 Docker
 Docker Compose
 
-Variables de Entorno: Por rapidez se utiliza el mismo archivo .env para la ejecución (no recomendable para ambientes productivos)
+Environment variables: In this case we use the .env file for the execution (not recommented to productive environments)
 
-Construye y arranca los contenedores usando Docker Compose:
+Build and run all the containers using docker compose:
 
 docker-compose up --build
 
-Esto iniciará tres servicios:
+This will start all the services:
 
-- Postgres: La base de datos PostgreSQL
-- Backend: Servidor Node.js corriendo en el puerto 3000
-- Frontend: Aplicación React.js corriendo en el puerto 80 (servida a través de Nginx)
+- Postgres: Database PostgreSQL running on port 5432
+- Backend: Servidor Node.js running on port 3000
+- Frontend: ReactJS application running on port 80 in apache server
 
-Accede a la aplicación:
-El frontend (React.js) estará disponible en http://localhost:80
-La API del backend (Node.js) estará disponible en http://localhost:3000
+Use the services:
+Frontend (React.js) will be available in http://localhost:80
+The backend API (Node.js) will be available in http://localhost:3000
 
 
-
-Licencia: Este proyecto está licenciado bajo la Licencia MIT.
+Licence: This proyect is licenced by MIT
