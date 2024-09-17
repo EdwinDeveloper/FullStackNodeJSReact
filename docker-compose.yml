@@ -38,8 +38,8 @@ services:
       - "80:80"
     depends_on:
       - nodejs
-    volumes:
-      - ./frontend/build:/usr/share/nginx/html
+    #volumes:
+    #  - ./frontend/build:/usr/share/nginx/html
 
 volumes:
   pgdata:
