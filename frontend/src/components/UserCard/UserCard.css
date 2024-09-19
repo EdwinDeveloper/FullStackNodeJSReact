@@ -28,7 +28,7 @@
   margin-top: 10px;
 }
 
-.update-btn, .delete-btn, .save-btn, .cancel-btn {
+.update-btn, .delete-btn, .save-btn, .cancel-btn, .tasks-btn {
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
@@ -71,4 +71,13 @@
 
 .cancel-btn:hover {
   background-color: #7f8c8d;
+}
+
+.tasks-btn {
+  background-color: #002fff;
+  color: white;
+}
+
+.tasks-btn:hover {
+  background-color: #0c2aab;
 }

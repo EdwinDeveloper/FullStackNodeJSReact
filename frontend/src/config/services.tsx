@@ -50,3 +50,26 @@ export function createUser(user: any): AxiosOptions{
     }
     return options
 }
+
+export function deleteTask(userId: string): AxiosOptions{
+    let options: AxiosOptions = {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        url: `${url_base}/tasks/${userId}`
+    }
+    return options
+}
+
+export function createTask(task: any): AxiosOptions{
+    let options: AxiosOptions = {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        url: `${url_base}/tasks/create`,
+        data: task
+    }
+    return options
+}

@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import './UserCard.css';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { Task, User } from '../../models/models';
 
 interface UserCardProps {
   user: User;
   onUpdate: (updatedUser: User) => void;
   onDelete: (id: string) => void;
+  onTasks: (user: User) => void;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, onUpdate, onDelete }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, onUpdate, onDelete, onTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState<User>({ ...user });
 
@@ -23,12 +19,12 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate, onDelete }) => {
 
   const handleCancelClick = () => {
     setIsEditing(false);
-    setEditedUser({ ...user }); // Reset to original values if canceled
+    setEditedUser({ ...user });
   };
 
   const handleSaveClick = () => {
-    onUpdate(editedUser); // Pass the updated user object back to the parent
-    setIsEditing(false); // Exit edit mode
+    onUpdate(editedUser);
+    setIsEditing(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +73,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate, onDelete }) => {
           <div className="user-card-buttons">
             <button type="submit" onClick={handleEditClick} className="update-btn">Update</button>
             <button onClick={() => onDelete(user.id)} className="delete-btn">Delete</button>
+            <button onClick={() => onTasks(user)} className="tasks-btn">Tasks</button>
           </div>
         </>
       )}

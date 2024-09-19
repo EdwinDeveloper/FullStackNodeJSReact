@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
 import userRoute from './routes/userRoutes'
+import taskRoute from './routes/taskRoutes'
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(cors({
 
 
 app.use('/users', userRoute);
+app.use('/tasks', taskRoute);
 
 export default app;
