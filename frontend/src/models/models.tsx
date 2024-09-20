@@ -22,6 +22,10 @@ export interface CreateTaskResponse extends DefaultResponse {
     data: Task
 }
 
+export interface UpateTaskResponse extends DefaultResponse {
+    data: Task
+}
+
 export interface User {
     id: string,
     name: string,
@@ -38,10 +42,11 @@ export interface Task {
 }
 
 export interface TaskRequest {
+    id?: string,
     title: string;
     priority: string;
     isCompleted: boolean;
-    assignedToId: String;
+    assignedToId?: String;
 }
 
 export interface DefaultResponse {

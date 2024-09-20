@@ -73,3 +73,14 @@ export function createTask(task: any): AxiosOptions{
     }
     return options
 }
+
+export function createOneUser(userId: String): AxiosOptions{
+    let options: AxiosOptions = {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        url: `${url_base}/users/${userId}`
+    }
+    return options
+}

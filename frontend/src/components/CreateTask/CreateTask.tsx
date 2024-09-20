@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import './CreateTask.css'
 import { User, Task, TaskRequest } from '../../models/models';
 import { initialTask } from '../../models/initializator'
-import { createTask as createTaskService } from '../../config/services';
+import { createTask as createTaskService, createOneUser } from '../../config/services';
 import { FetchCall } from '../../config/fetch';
-import { CreateTaskResponse } from '../../models/models';
+import { CreateTaskResponse, UpateTaskResponse, CreateUserResponse } from '../../models/models';
 
 interface CreateTaskProps {
   onCreateTask: (task: Task) => void;
+  handleInfoUserUpdated: (user: User) => void;
   user: User;
+  updateTask: boolean;
+  taskToUpdate:Task
 }
 
-const CreateTask: React.FC<CreateTaskProps> = ({ onCreateTask, user }) => {
-  const [taskData, setTaskData] = useState<Task>(initialTask);
+const CreateTask: React.FC<CreateTaskProps> = ({ onCreateTask, user, updateTask, taskToUpdate, handleInfoUserUpdated }) => {
+  const [taskData, setTaskData] = useState<Task>(updateTask ? taskToUpdate :initialTask);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
-
+    
     if (type === 'checkbox') {
       const { checked } = e.target as HTMLInputElement;
       setTaskData((prevTask) => ({
@@ -38,20 +41,42 @@ const CreateTask: React.FC<CreateTaskProps> = ({ onCreateTask, user }) => {
       return;
     }
 
-    let newData: TaskRequest = {
+    if(updateTask){
+      let newData: TaskRequest = {
+        id: taskData.id,
         title: taskData.title,
         priority: taskData.priority,
-        isCompleted: false,
-        assignedToId: user.id
-    }
+        isCompleted: updateTask ? taskData.isCompleted : false
+      }
 
-    const response: CreateTaskResponse = await FetchCall(createTaskService(newData))
-    response.status === 201 ? window.location.reload() : window.alert('Task created')
+      const response: CreateTaskResponse = await FetchCall(createTaskService(newData))
+
+      const updated: CreateUserResponse = await FetchCall(createOneUser(user.id))
+      updated.status === 200 ? handleInfoUserUpdated(updated.data) : window.alert('Task not updated')
+    }else{
+      let newData: TaskRequest = {
+        title: taskData.title,
+        priority: taskData.priority,
+        isCompleted: updateTask ? taskToUpdate.isCompleted : false,
+        assignedToId: user.id
+      }
+
+      const response: UpateTaskResponse = await FetchCall(createTaskService(newData))
+
+      const updated: CreateUserResponse = await FetchCall(createOneUser(user.id))
+      updated.status === 200 ? handleInfoUserUpdated(updated.data) : window.alert('Task not created')
+    }
   };
 
   return (
     <div className="create-task">
-      <h2>Create a New Task</h2>
+      {
+        updateTask
+        ?
+        <h2>Update the task</h2>
+        :
+        <h2>Create New Task</h2>
+      }
       <form onSubmit={handleSubmit} className="task-form">
         <div className="form-group">
           <label htmlFor="title">Task Title</label>
@@ -94,7 +119,13 @@ const CreateTask: React.FC<CreateTaskProps> = ({ onCreateTask, user }) => {
         </div>
 
         <button type="submit" className="create-btn">
-          Create Task
+          {
+            updateTask
+            ?
+            "Update Task"
+            :
+            "Create Task"
+          }
         </button>
       </form>
     </div>
