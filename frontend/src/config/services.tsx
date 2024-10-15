@@ -1,8 +1,8 @@
 import { User } from '../models/models'
 import { AxiosOptions } from './AxiosOptions'
 
-//const url_base = "http://localhost:3000"
-const url_base = "http://192.241.147.44:3000"
+const url_base = "http://localhost:3000"
+//const url_base = "http://192.241.147.44:3000"
 
 export function getAllUsers(): AxiosOptions{
     let options: AxiosOptions = {
